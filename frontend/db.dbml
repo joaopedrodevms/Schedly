@@ -1,0 +1,120 @@
+Project sheduly {
+  database_type: "PostgreSQL"
+  note: "Modelo de banco para o MVP do Sheduly (clone do Calendly)"
+}
+
+Table users {
+  id uuid [pk]
+  email varchar [unique, not null]
+  password_hash varchar [not null]
+  email_verified boolean [default: false]
+  is_active boolean [default: true]
+  created_at timestamp [default: `now()`]
+  updated_at timestamp
+
+  Note: "Usuários do sistema, responsáveis pelos agendamentos"
+}
+
+Table profiles {
+  id uuid [pk]
+  user_id uuid [ref: > users.id, unique, not null]
+  name varchar
+  username varchar [unique, not null]
+  bio text
+  avatar_url varchar
+  timezone varchar
+
+  Note: "Informações públicas do usuário"
+}
+
+Table event_types {
+  id uuid [pk]
+  user_id uuid [ref: > users.id, not null]
+  title varchar [not null]
+  description text
+  slug varchar [unique, not null]
+  duration_minutes int [not null]
+  location_type varchar
+  location_value varchar
+  buffer_before int
+  buffer_after int
+  max_per_day int
+  is_active boolean [default: true]
+  created_at timestamp [default: `now()`]
+
+  Note: "Tipos de evento que podem ser agendados"
+}
+
+Table availabilities {
+  id uuid [pk]
+  user_id uuid [ref: > users.id, not null]
+  weekday int [not null] // 0 = domingo, 6 = sábado
+  start_time time [not null]
+  end_time time [not null]
+  is_active boolean [default: true]
+
+  Note: "Regras de disponibilidade por dia da semana"
+}
+
+Table events {
+  id uuid [pk]
+  event_type_id uuid [ref: > event_types.id, not null]
+  host_id uuid [ref: > users.id, not null]
+  guest_name varchar [not null]
+  guest_email varchar [not null]
+  starts_at timestamp [not null]
+  ends_at timestamp [not null]
+  timezone varchar
+  status varchar [default: 'confirmed']
+  created_at timestamp [default: `now()`]
+
+  Note: "Agendamentos concretos entre host e convidado"
+}
+
+Table event_guests {
+  id uuid [pk]
+  event_id uuid [ref: > events.id, not null]
+  name varchar
+  email varchar
+
+  Note: "Convidados adicionais (caso multi-convidado seja ativado)"
+}
+
+Table workspaces {
+  id uuid [pk]
+  name varchar [not null]
+  owner_id uuid [ref: > users.id, not null]
+  created_at timestamp [default: `now()`]
+
+  Note: "Grupos de trabalho, ideal para times ou empresas"
+}
+
+Table workspace_members {
+  id uuid [pk]
+  workspace_id uuid [ref: > workspaces.id, not null]
+  user_id uuid [ref: > users.id, not null]
+  role varchar [default: 'member']
+
+  Note: "Usuários pertencentes a um workspace"
+}
+
+Table settings {
+  id uuid [pk]
+  user_id uuid [ref: > users.id, not null, unique]
+  reminder_email boolean [default: true]
+  theme varchar [default: 'light']
+  language varchar [default: 'pt-BR']
+
+  Note: "Preferências individuais do usuário"
+}
+
+Table tokens {
+  id uuid [pk]
+  user_id uuid [ref: > users.id, not null]
+  type varchar [not null] // refresh, verify, reset, etc.
+  value varchar [not null]
+  expires_at timestamp
+  created_at timestamp [default: `now()`]
+
+  Note: "Tokens para autenticação, verificação e segurança"
+}
