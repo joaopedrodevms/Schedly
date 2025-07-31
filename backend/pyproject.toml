@@ -1,0 +1,76 @@
+[tool.poetry]
+name = "schedly"
+version = "0.1.0"
+description = ""
+authors = ["Paulo Mendonça <paulo.mendonca@visie.com.br>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "3.12.*"
+fastapi = {extras = ["standard"], version = "^0.115.0"}
+alembic = "^1.13.3"
+pydantic-settings = "^2.6.0"
+asyncpg = "^0.30.0"
+greenlet = "^3.1.1"
+websockets = "^13.1"
+pytest-asyncio = "^0.24.0"
+pytest-mock = "^3.14.0"
+async-generator = "^1.10"
+motor = "^3.6.0"
+redis = "^5.2.1"
+sqlmodel = "^0.0.22"
+aiosqlite = "^0.21.0"
+jose = "^1.0.0"
+python-jose = "^3.4.0"
+pyjwt = "^2.10.1"
+passlib = "^1.7.4"
+bcrypt = "^4.3.0"
+
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^8.3.3"
+pytest-cov = "^5.0.0"
+taskipy = "^1.13.0"
+ruff = "^0.6.9"
+fakeredis = "^2.26.1"
+cookiecutter = "^2.6.0"
+
+[tool.ruff]
+line-length = 79
+extend-exclude = ['migrations', 'labs*', 'cookiecutter*', 'create_module.py']
+
+[tool.ruff.lint]
+preview = true
+select = ['I', 'F', 'E', 'W', 'PL', 'PT']
+
+[tool.ruff.format]
+preview = true
+quote-style = 'single'
+
+[tool.pytest.ini_options]
+pythonpath = "."
+addopts = '-p no:warnings'
+asyncio_mode = 'auto'
+
+
+[tool.taskipy.tasks]
+lint = 'ruff check . && ruff check . --diff'
+format = 'ruff check . --fix && ruff format .'
+run = 'fastapi dev schedly/app.py'
+pre_test = 'task format'
+test = 'pytest -s -x --ff --cov=schedly -vv'
+post_test = 'coverage html'
+onlytest = 'pytest -s -x --cov=schedly -vv'
+seed = 'python schedly/scripts/seed.py'
+alembic_up = 'cd schedly && alembic upgrade head'
+alembic_down = 'cd schedly && alembic downgrade base'
+alembic_down_up = 'cd schedly && alembic downgrade base && alembic upgrade head && python scripts/seed.py'
+db = 'docker compose up -d'
+mongo = 'docker compose up -d mongo'
+redis = 'docker compose up -d redis'
+postgres = 'docker compose up -d postgres'
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
