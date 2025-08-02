@@ -4,7 +4,7 @@ from uuid import UUID
 
 import pytest
 from fastapi.testclient import TestClient
-from sqlalchemy import event
+from sqlalchemy import scheduling
 from sqlalchemy.ext.asyncio import AsyncSession, create_async_engine
 from sqlalchemy.orm import sessionmaker
 
@@ -102,8 +102,8 @@ def _mock_db_time(
         if hasattr(target, 'id'):
             target.id = UUID(uuid)
 
-    event.listen(model, 'before_insert', fake_time_hook)
+    scheduling.listen(model, 'before_insert', fake_time_hook)
 
     yield time
 
-    event.remove(model, 'before_insert', fake_time_hook)
+    scheduling.remove(model, 'before_insert', fake_time_hook)

@@ -1,29 +1,25 @@
-# app/api/services/user_service.py
+import uuid
 from core.use_cases.user import (
-    CreateUser,
     DeleteUser,
     GetUser,
     UpdateUser,
 )
-from infra.repositories.user_repository import UserRepository, User
+from infra.repositories.user_repository import UserRepository
+from interface.schemas.User import UserPublicDto
 
 
 class UserService:
     def __init__(self, repo: UserRepository):
         self.repo = repo
 
-    async def create(self, **kwargs) -> User:
-        use_case = CreateUser(self.repo)
-        return await use_case.execute(**kwargs)
-
-    async def get_by_id(self, user_id: int) -> User | None:
+    async def get_current_user(self, token_user_id: uuid.UUID) -> UserPublicDto | None:
         use_case = GetUser(self.repo)
-        return await use_case.get_by_id(user_id)
+        return await use_case.get_current_user(token_user_id)
 
-    async def update(self, user_id: int, **kwargs) -> User:
+    async def update(self, token_user_id: uuid.UUID, **kwargs) -> UserPublicDto:
         use_case = UpdateUser(self.repo)
-        return await use_case.execute(user_id=user_id, **kwargs)
+        return await use_case.execute(token_user_id=token_user_id, **kwargs)
 
-    async def delete(self, user_id: int) -> None:
+    async def delete(self, token_user_id: uuid.UUID) -> UserPublicDto:
         use_case = DeleteUser(self.repo)
-        return await use_case.execute(user_id)
+        return await use_case.execute(token_user_id)

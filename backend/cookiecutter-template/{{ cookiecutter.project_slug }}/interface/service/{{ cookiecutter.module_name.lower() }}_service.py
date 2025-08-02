@@ -1,11 +1,11 @@
 # app/api/services/{{ cookiecutter.module_name.lower() }}_service.py
-from splice.core.use_cases.{{ cookiecutter.module_name.lower() }} import (
+from schedly.core.use_cases.{{ cookiecutter.module_name.lower() }} import (
     Create{{ cookiecutter.module_name.capitalize() }},
     Delete{{ cookiecutter.module_name.capitalize() }},
     Get{{ cookiecutter.module_name.capitalize() }},
     Update{{ cookiecutter.module_name.capitalize() }}
 )
-from splice.infra.repositories.{{ cookiecutter.module_name.lower() }}_repository import {{ cookiecutter.module_name.capitalize() }}Repository, {{ cookiecutter.module_name.capitalize() }}
+from schedly.infra.repositories.{{ cookiecutter.module_name.lower() }}_repository import {{ cookiecutter.module_name.capitalize() }}Repository, {{ cookiecutter.module_name.capitalize() }}
 
 
 class {{ cookiecutter.module_name.capitalize() }}Service:

@@ -1,7 +1,7 @@
 from sqlalchemy.future import select
 from sqlalchemy.orm import Session
 
-from splice.core.models.{{ cookiecutter.module_name.lower() }} import {{ cookiecutter.module_name.capitalize() }}
+from schedly.core.models.{{ cookiecutter.module_name.lower() }} import {{ cookiecutter.module_name.capitalize() }}
 
 
 class {{ cookiecutter.module_name.capitalize() }}Repository:

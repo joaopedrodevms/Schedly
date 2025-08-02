@@ -1,4 +1,4 @@
-from splice.infra.repositories.{{ cookiecutter.module_name.lower() }}_repository import {{ cookiecutter.module_name.capitalize() }}Repository
+from schedly.infra.repositories.{{ cookiecutter.module_name.lower() }}_repository import {{ cookiecutter.module_name.capitalize() }}Repository
 
 
 class Delete{{ cookiecutter.module_name.capitalize() }}:

@@ -1,13 +1,10 @@
 import os
+from uuid import UUID
 
 from core.use_cases.user import CreateUser
 from infra.database import mongo_session, pg_session
 from infra.repositories.user_repository import User, UserRepository
-import bcrypt
-from uuid import UUID
-
-# import uuid
-bcrypt.__about__ = bcrypt
+from utils.password import hash_password
 
 
 async def seed():

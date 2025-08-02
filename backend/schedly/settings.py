@@ -15,7 +15,7 @@ class Settings(BaseSettings):
     MONGO_URL: str = 'mongodb://localhost:27017/schedly'
 
     # JWT
-    JWT_ACCESS_TOKEN_EXPIRE_MINUTES: int = 30
+    JWT_ACCESS_TOKEN_EXPIRE_MINUTES: int = 86400
     JWT_ALGORITHM: str = 'HS256'
     JWT_SECRET_KEY: str = (
         'qualquer_texto'  # gere com comando: openssl rand -hex 32

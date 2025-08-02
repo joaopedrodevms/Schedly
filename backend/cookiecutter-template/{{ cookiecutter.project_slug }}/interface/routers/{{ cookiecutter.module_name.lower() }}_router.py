@@ -2,10 +2,10 @@ from fastapi import APIRouter, Body, Depends
 from fastapi.exceptions import HTTPException
 from sqlalchemy.orm import Session
 
-from splice.infra.database import get_pg_session
-from splice.infra.repositories.{{ cookiecutter.module_name.lower() }}_repository import {{ cookiecutter.module_name.capitalize() }}Repository
-from splice.core.models.{{ cookiecutter.module_name.lower() }} import {{ cookiecutter.module_name.capitalize() }}CreateSchema, {{ cookiecutter.module_name.capitalize() }}UpdateSchema, {{ cookiecutter.module_name.capitalize() }}
-from splice.interface.service.{{ cookiecutter.module_name.lower() }}_service import {{ cookiecutter.module_name.capitalize() }}Service
+from schedly.infra.database import get_pg_session
+from schedly.infra.repositories.{{ cookiecutter.module_name.lower() }}_repository import {{ cookiecutter.module_name.capitalize() }}Repository
+from schedly.core.models.{{ cookiecutter.module_name.lower() }} import {{ cookiecutter.module_name.capitalize() }}CreateSchema, {{ cookiecutter.module_name.capitalize() }}UpdateSchema, {{ cookiecutter.module_name.capitalize() }}
+from schedly.interface.service.{{ cookiecutter.module_name.lower() }}_service import {{ cookiecutter.module_name.capitalize() }}Service
 
 router = APIRouter(prefix="/{{ cookiecutter.module_name.lower() }}s")
 # TODO: adicionar router em app.py
