@@ -2,7 +2,8 @@
 
 Schedly é uma aplicação moderna de agendamento criada como projeto de portfólio para demonstrar habilidades técnicas em desenvolvimento full stack com foco em arquitetura limpa, performance, usabilidade e boas práticas de engenharia de software. Com uma interface intuitiva e recursos robustos, o Schedly oferece uma experiência fluida para gerenciar eventos e disponibilidades de forma elegante e eficiente.
 
-![Schedly Banner](frontend/public/assets/schedly-dark.jpg)
+![Agendamento](screenshots/scheduling1-dark.png)
+![Calendario Eventos](screenshots/calendar-dark.png)
 
 ## ✨ Funcionalidades
 
@@ -46,12 +47,8 @@ Algumas telas da aplicação:
 ![Tela Inicial](screenshots/home-dark.png)
 
 ### Agendamento de Evento
-![Agendamento](screenshots/scheduling1-dark.png)
 ![Agendamento](screenshots/scheduling2-dark.png)
 ![Agendamento](screenshots/scheduling3-dark.png)
-
-### Calendário de Eventos
-![Calendario Eventos](screenshots/calendar-dark.png)
 
 ### Eventos
 ![Eventos](screenshots/event_list-dark.png)
@@ -73,8 +70,8 @@ Outras imagens estão disponíveis na pasta /screenshots, incluindo diferentes p
 
 1. Clone o repositório:
 ```
-git clone https://github.com/seu-usuario/schedly.git
-cd schedly
+git clone https://github.com/joaopedrodevms/Schedly.git
+cd Schedly
 ```
 
 2. Suba os serviços com Docker Compose:
