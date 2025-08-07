@@ -9,17 +9,17 @@ from sqlalchemy.ext.asyncio import AsyncSession, create_async_engine
 from sqlalchemy.orm import sessionmaker
 
 from app import app
-from core.models.order import PaymentType
-from infra.database.base import SQLModel
-from infra.repositories.establishment_repository import (
+from schedly.core.models.order import PaymentType
+from schedly.infra.database.base import SQLModel
+from schedly.infra.repositories.establishment_repository import (
     Establishment,
     EstablishmentRepository,
 )
-from infra.repositories.order_repository import (
+from schedly.infra.repositories.order_repository import (
     Order,
     OrderRepository,
 )
-from infra.repositories.user_repository import User, UserRepository
+from schedly.infra.repositories.user_repository import User, UserRepository
 
 
 @pytest.fixture

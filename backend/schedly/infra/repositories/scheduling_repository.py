@@ -3,7 +3,7 @@ from sqlalchemy.orm import Session
 from datetime import datetime
 import uuid
 
-from core.models.scheduling import Scheduling
+from schedly.core.models.scheduling import Scheduling
 
 
 class SchedulingRepository:

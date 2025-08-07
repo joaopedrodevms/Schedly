@@ -1,16 +1,16 @@
-from infra.repositories.avails_repository import AvailsRepository
-from interface.schemas.Event import EventBySlugRequestDto, EventCreateRequestDto, EventDto, EventUpdateRequestDto, EventWithAvailabilityDto
+from schedly.infra.repositories.avails_repository import AvailsRepository
+from schedly.interface.schemas.Event import EventBySlugRequestDto, EventCreateRequestDto, EventDto, EventUpdateRequestDto, EventWithAvailabilityDto
 from fastapi import APIRouter, Body, Depends
 from fastapi.exceptions import HTTPException
 from sqlalchemy.orm import Session
 
-from infra.database import get_pg_session
-from infra.repositories.event_repository import EventRepository
-from infra.repositories.user_repository import UserRepository
-from infra.repositories.scheduling_repository import SchedulingRepository
-from interface.service.event_service import EventService
+from schedly.infra.database import get_pg_session
+from schedly.infra.repositories.event_repository import EventRepository
+from schedly.infra.repositories.user_repository import UserRepository
+from schedly.infra.repositories.scheduling_repository import SchedulingRepository
+from schedly.interface.service.event_service import EventService
 
-from interface.middleware.jwt_bearer import JWTBearer
+from schedly.interface.middleware.jwt_bearer import JWTBearer
 
 router = APIRouter(
     prefix="/events"

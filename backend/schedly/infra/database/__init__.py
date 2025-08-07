@@ -1,21 +1,8 @@
 # from async_generator import asynccontextmanager
-import redis
-from motor.motor_asyncio import AsyncIOMotorClient
 from sqlalchemy.ext.asyncio import AsyncSession, create_async_engine
 from sqlalchemy.orm import sessionmaker
 
-from settings import settings
-
-# Redis
-redis_session = redis.Redis(host='localhost', port=6379, db=0)
-
-# MongoDB
-__mongo_client = AsyncIOMotorClient(settings.MONGO_URL)
-mongo_session = __mongo_client.get_database(settings.MONGO_DB_NAME)
-
-
-async def get_mongo_session():
-    return mongo_session
+from schedly.settings import settings
 
 
 # Sync

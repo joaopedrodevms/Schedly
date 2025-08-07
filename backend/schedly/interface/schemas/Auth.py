@@ -1,5 +1,5 @@
 from pydantic import BaseModel, EmailStr
-from interface.schemas.User import UserPublicDto
+from schedly.interface.schemas.User import UserPublicDto
 
 class LoginRequestDto(BaseModel):
     email: EmailStr

@@ -1,8 +1,8 @@
 import uuid
 import datetime
 from typing import Optional
-from interface.schemas.Event import EventDto
-from core.models.scheduling import EventStatus
+from schedly.interface.schemas.Event import EventDto
+from schedly.core.models.scheduling import EventStatus
 from pydantic import BaseModel
 
 class SchedulingDto(BaseModel):

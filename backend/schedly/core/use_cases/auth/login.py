@@ -1,9 +1,9 @@
-from interface.schemas.Auth import LoginRequestDto, LoginResponseDto
-from interface.schemas.User import UserPublicDto
-from infra.repositories.user_repository import UserRepository
-from infra.security.jwt_handler import create_access_token
-from utils.password import verify_password
-from interface.exceptions.custom_exceptions import AuthenticationException, BusinessException
+from schedly.interface.schemas.Auth import LoginRequestDto, LoginResponseDto
+from schedly.interface.schemas.User import UserPublicDto
+from schedly.infra.repositories.user_repository import UserRepository
+from schedly.infra.security.jwt_handler import create_access_token
+from schedly.utils.password import verify_password
+from schedly.interface.exceptions.custom_exceptions import AuthenticationException, BusinessException
 
 
 class Login:

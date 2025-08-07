@@ -5,7 +5,7 @@ from urllib.parse import urljoin
 
 from fastapi import UploadFile
 from minio.error import S3Error
-from settings import settings
+from schedly.settings import settings
 
 from .minio_config import minio_client, BUCKET_NAME, ensure_bucket
 
@@ -40,9 +40,8 @@ class StorageService:
         Returns:
             str: The public URL for the object
         """
-        # Use the endpoint from settings, or fallback to localhost
-        endpoint = getattr(settings, "MINIO_ENDPOINT", "http://localhost:9000")
-        return urljoin(f"{endpoint}/{BUCKET_NAME}/", object_name)
+        # Use the public URL from settings for external access
+        return urljoin(f"{settings.MINIO_PUBLIC_URL}/{BUCKET_NAME}/", object_name)
 
     @staticmethod
     async def upload_profile_photo(file: UploadFile, user_id: str, photo_type: ProfilePhotoType) -> str:

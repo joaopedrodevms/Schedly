@@ -1,14 +1,14 @@
 from typing import Any
 from fastapi import Depends
-from interface.schemas.User import UserPublicDto, UserUpdateRequestDto, UserValidateSlugResponseDto
-from core.use_cases.user import (
+from schedly.interface.schemas.User import UserPublicDto, UserUpdateRequestDto, UserValidateSlugResponseDto
+from schedly.core.use_cases.user import (
     GetUser, UpdateUser, DeleteUser,
     UpdateAvatar, UpdateCover,
     RemoveAvatar, RemoveCover,
     ValidateSlug
 )
-from infra.repositories.user_repository import UserRepository
-from infra.storage.storage_service import StorageService
+from schedly.infra.repositories.user_repository import UserRepository
+from schedly.infra.storage.storage_service import StorageService
 
 class UserService:
     def __init__(

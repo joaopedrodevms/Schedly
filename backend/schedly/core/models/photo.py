@@ -1,6 +1,6 @@
 from enum import Enum
 from typing import Any
-from interface.exceptions.photo_exceptions import InvalidPhotoFormatException, PhotoTooLargeException
+from schedly.interface.exceptions.photo_exceptions import InvalidPhotoFormatException, PhotoTooLargeException
 
 class PhotoType(Enum):
     AVATAR = "avatar"

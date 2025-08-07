@@ -1,10 +1,10 @@
-from infra.security.jwt_handler import create_access_token
-from interface.schemas.User import UserPublicDto
-from core.models.user import User
-from utils.validate_slug import validate_slug
-from utils.password import hash_password
-from interface.schemas.Auth import RegisterRequestDto, RegisterResponseDto
-from infra.repositories.user_repository import UserRepository
+from schedly.infra.security.jwt_handler import create_access_token
+from schedly.interface.schemas.User import UserPublicDto
+from schedly.core.models.user import User
+from schedly.utils.validate_slug import validate_slug
+from schedly.utils.password import hash_password
+from schedly.interface.schemas.Auth import RegisterRequestDto, RegisterResponseDto
+from schedly.infra.repositories.user_repository import UserRepository
 
 class Register:
     def __init__(self, user_repo: UserRepository):

@@ -1,6 +1,6 @@
 from enum import Enum
 from datetime import datetime
-from infra.database.base import BaseTable, Field
+from schedly.infra.database.base import BaseTable, Field
 from .event import Event
 from sqlmodel import Relationship
 import uuid

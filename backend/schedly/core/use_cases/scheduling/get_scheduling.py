@@ -1,7 +1,7 @@
 import uuid
-from interface.schemas.Scheduling import SchedulingDto
-from interface.schemas.Event import EventDto
-from infra.repositories.scheduling_repository import SchedulingRepository, Scheduling
+from schedly.interface.schemas.Scheduling import SchedulingDto
+from schedly.interface.schemas.Event import EventDto
+from schedly.infra.repositories.scheduling_repository import SchedulingRepository, Scheduling
 
 
 class GetScheduling:

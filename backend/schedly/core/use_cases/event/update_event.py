@@ -1,7 +1,7 @@
 import uuid
-from interface.schemas.Event import EventDto, EventUpdateRequestDto
-from infra.repositories.event_repository import EventRepository, Event
-from utils.validate_slug import validate_slug
+from schedly.interface.schemas.Event import EventDto, EventUpdateRequestDto
+from schedly.infra.repositories.event_repository import EventRepository, Event
+from schedly.utils.validate_slug import validate_slug
 
 
 class UpdateEvent:

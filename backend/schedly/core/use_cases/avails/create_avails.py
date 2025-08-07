@@ -4,7 +4,7 @@ Caso de uso para criação e atualização de disponibilidades de um evento.
 from datetime import time
 from typing import List
 
-from interface.schemas.Avails import AvailsDto, Availability
+from schedly.interface.schemas.Avails import AvailsDto, Availability
 from schedly.infra.repositories.avails_repository import AvailsRepository, Avails
 
 

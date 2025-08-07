@@ -1,6 +1,6 @@
 from enum import Enum
-from infra.database.base import BaseTable, Field
-from utils.generate_schemas import generate_schema
+from schedly.infra.database.base import BaseTable, Field
+from schedly.utils.generate_schemas import generate_schema
 from sqlmodel import Relationship
 import uuid
 from .user import User

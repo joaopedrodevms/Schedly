@@ -1,6 +1,6 @@
-from interface.schemas.User import UserPublicDto, UserUpdateRequestDto
-from infra.repositories.user_repository import UserRepository
-from utils.validate_slug import validate_slug
+from schedly.interface.schemas.User import UserPublicDto, UserUpdateRequestDto
+from schedly.infra.repositories.user_repository import UserRepository
+from schedly.utils.validate_slug import validate_slug
 
 class UpdateUser:
     def __init__(self, user_repo: UserRepository):

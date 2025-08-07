@@ -1,4 +1,4 @@
-from interface.schemas.Avails import AvailsDto, Availability
+from schedly.interface.schemas.Avails import AvailsDto, Availability
 from schedly.infra.repositories.avails_repository import AvailsRepository, Avails
 import uuid
 

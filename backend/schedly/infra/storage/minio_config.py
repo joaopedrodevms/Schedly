@@ -1,14 +1,14 @@
 from minio import Minio
-from settings import settings
+from schedly.settings import settings
 
 minio_client = Minio(
-    "localhost:9000",
-    access_key="admin",
-    secret_key="admin1234",
-    secure=False  # Set to True in production with SSL
+    settings.MINIO_ENDPOINT,
+    access_key=settings.MINIO_ACCESSKEY,
+    secret_key=settings.MINIO_SECRETKEY,
+    secure=settings.MINIO_SECURE  # Set to True in production with SSL
 )
 
-BUCKET_NAME = "schedly-profiles"
+BUCKET_NAME = settings.MINIO_BUCKET_NAME
 
 # Ensure bucket exists
 def ensure_bucket():

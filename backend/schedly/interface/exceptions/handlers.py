@@ -1,7 +1,7 @@
 from fastapi import Request
 from fastapi.responses import JSONResponse
 
-from interface.exceptions.custom_exceptions import (
+from schedly.interface.exceptions.custom_exceptions import (
     AuthenticationException,
     BusinessException,
     NotFoundException,

@@ -1,15 +1,15 @@
 import uuid
-from infra.repositories.avails_repository import AvailsRepository
-from infra.repositories.event_repository import EventRepository
-from interface.schemas.Scheduling import SchedulingCreateRequestDto, SchedulingDto, SchedulingUpdateRequestDto
-from core.use_cases.scheduling import (
+from schedly.infra.repositories.avails_repository import AvailsRepository
+from schedly.infra.repositories.event_repository import EventRepository
+from schedly.interface.schemas.Scheduling import SchedulingCreateRequestDto, SchedulingDto, SchedulingUpdateRequestDto
+from schedly.core.use_cases.scheduling import (
     CreateScheduling,
     DeleteScheduling,
     GetScheduling,
     GetSchedulingByUserId,
     UpdateScheduling,
 )
-from infra.repositories.scheduling_repository import SchedulingRepository, Scheduling
+from schedly.infra.repositories.scheduling_repository import SchedulingRepository, Scheduling
 
 
 class SchedulingService:

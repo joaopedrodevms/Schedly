@@ -1,7 +1,7 @@
-from infra.repositories.user_repository import UserRepository
-from core.use_cases.auth.login import Login
-from core.use_cases.auth.register import Register
-from interface.schemas.Auth import LoginRequestDto, LoginResponseDto, RegisterRequestDto, RegisterResponseDto
+from schedly.infra.repositories.user_repository import UserRepository
+from schedly.core.use_cases.auth.login import Login
+from schedly.core.use_cases.auth.register import Register
+from schedly.interface.schemas.Auth import LoginRequestDto, LoginResponseDto, RegisterRequestDto, RegisterResponseDto
 
 class AuthService:
     def __init__(self, user_repo: UserRepository):

@@ -2,7 +2,7 @@ import uuid
 import datetime
 from typing import Optional, List
 from datetime import time
-from core.models.event import EventLocation
+from schedly.core.models.event import EventLocation
 from pydantic import BaseModel
 
 class UserProfileDto(BaseModel):

@@ -4,7 +4,7 @@ from typing import Any, Dict
 from jose import jwt
 from passlib.context import CryptContext
 
-from settings import settings
+from schedly.settings import settings
 
 pwd_context = CryptContext(schemes=['bcrypt'], deprecated='auto')
 

@@ -2,7 +2,7 @@ from sqlalchemy.future import select
 from sqlalchemy.orm import Session
 import uuid
 
-from core.models.avails import Avails
+from schedly.core.models.avails import Avails
 
 
 class AvailsRepository:

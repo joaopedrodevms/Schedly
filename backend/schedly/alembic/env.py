@@ -7,8 +7,12 @@ from sqlalchemy.engine import Connection
 from sqlalchemy.ext.asyncio import async_engine_from_config
 from sqlmodel import SQLModel
 
-from core.models import *  # noqa: F403
-from settings import settings
+# Import all models
+from schedly.core.models.user import User  # noqa: F401
+from schedly.core.models.event import Event  # noqa: F401
+from schedly.core.models.avails import Avails  # noqa: F401
+from schedly.core.models.scheduling import Scheduling  # noqa: F401
+from schedly.settings import settings
 
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.

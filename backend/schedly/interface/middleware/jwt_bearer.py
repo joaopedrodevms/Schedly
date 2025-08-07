@@ -3,7 +3,7 @@ from fastapi import HTTPException, Request
 from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 from jose import JWTError
 
-from infra.security.jwt_handler import decode_token
+from schedly.infra.security.jwt_handler import decode_token
 
 class JWTBearer(HTTPBearer):
     def __init__(self, auto_error: bool = True):

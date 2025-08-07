@@ -1,8 +1,8 @@
 import uuid
-from interface.schemas.Event import EventDto
-from infra.repositories.event_repository import EventRepository
-from infra.repositories.scheduling_repository import SchedulingRepository
-from infra.repositories.avails_repository import AvailsRepository
+from schedly.interface.schemas.Event import EventDto
+from schedly.infra.repositories.event_repository import EventRepository
+from schedly.infra.repositories.scheduling_repository import SchedulingRepository
+from schedly.infra.repositories.avails_repository import AvailsRepository
 
 
 class DeleteEvent:

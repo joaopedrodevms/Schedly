@@ -5,7 +5,7 @@ import AgendaView from "./components/AgendaView"
 
 export default function Calendar() {
 
-    const [currentDate, setCurrentDate] = useState(new Date())
+    const [currentDate] = useState(new Date())
 
     const { data: schedulings } = useQuery({
         ...getSchedulingOptions()

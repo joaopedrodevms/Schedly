@@ -1,6 +1,6 @@
 from sqlalchemy import select
 
-from infra.repositories.user_repository import User, UserRepository
+from schedly.infra.repositories.user_repository import User, UserRepository
 
 
 async def test_create_user(session):

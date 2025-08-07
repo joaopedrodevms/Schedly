@@ -1,6 +1,6 @@
 import uuid
-from interface.schemas.User import UserPublicDto
-from infra.repositories.user_repository import UserRepository
+from schedly.interface.schemas.User import UserPublicDto
+from schedly.infra.repositories.user_repository import UserRepository
 
 
 class DeleteUser:

@@ -1,11 +1,11 @@
 import uuid
 from typing import List
 
-from interface.schemas.Scheduling import SchedulingDto
-from interface.schemas.Event import EventDto
-from infra.repositories.event_repository import EventRepository
-from infra.repositories.scheduling_repository import SchedulingRepository
-from core.models.scheduling import Scheduling
+from schedly.interface.schemas.Scheduling import SchedulingDto
+from schedly.interface.schemas.Event import EventDto
+from schedly.infra.repositories.event_repository import EventRepository
+from schedly.infra.repositories.scheduling_repository import SchedulingRepository
+from schedly.core.models.scheduling import Scheduling
 
 
 class GetSchedulingByUserId:

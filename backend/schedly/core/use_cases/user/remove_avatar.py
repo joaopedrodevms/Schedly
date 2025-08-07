@@ -1,7 +1,7 @@
-from infra.storage.storage_service import StorageService, ProfilePhotoType
-from interface.schemas.User import UserPublicDto
-from infra.repositories.user_repository import UserRepository
-from interface.exceptions.photo_exceptions import UserNotFoundException
+from schedly.infra.storage.storage_service import StorageService, ProfilePhotoType
+from schedly.interface.schemas.User import UserPublicDto
+from schedly.infra.repositories.user_repository import UserRepository
+from schedly.interface.exceptions.photo_exceptions import UserNotFoundException
 
 class RemoveAvatar:
     def __init__(self, user_repo: UserRepository, storage_service: StorageService):

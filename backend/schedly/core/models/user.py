@@ -1,6 +1,6 @@
-from infra.database.base import BaseTable, Field
+from schedly.infra.database.base import BaseTable, Field
 from typing import Optional
-from utils.generate_schemas import generate_schema
+from schedly.utils.generate_schemas import generate_schema
 from sqlmodel import Relationship
 
 

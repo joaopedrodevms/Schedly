@@ -2,7 +2,7 @@ from sqlalchemy.future import select
 from sqlalchemy.orm import Session
 import uuid
 
-from core.models.event import Event
+from schedly.core.models.event import Event
 
 
 class EventRepository:

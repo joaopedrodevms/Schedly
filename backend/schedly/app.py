@@ -5,13 +5,13 @@ from alembic.config import Config
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from interface.exceptions.custom_exceptions import (
+from schedly.interface.exceptions.custom_exceptions import (
     AuthenticationException,
     BusinessException,
     NotFoundException,
     ValidationException,
 )
-from interface.exceptions.handlers import (
+from schedly.interface.exceptions.handlers import (
     authentication_exception_handler,
     business_exception_handler,
     invalid_type,
@@ -19,12 +19,12 @@ from interface.exceptions.handlers import (
     not_found_exception_handler,
     validation_exception_handler,
 )
-from settings import settings
-from interface.routers.scheduling_router import router as scheduling_router
-from interface.routers.user_router import router as user_router
-from interface.routers.event_router import router as event_router
-from interface.routers.avails_router import router as avails_router
-from interface.routers.auth_router import router as auth_router
+from schedly.settings import settings
+from schedly.interface.routers.scheduling_router import router as scheduling_router
+from schedly.interface.routers.user_router import router as user_router
+from schedly.interface.routers.event_router import router as event_router
+from schedly.interface.routers.avails_router import router as avails_router
+from schedly.interface.routers.auth_router import router as auth_router
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):

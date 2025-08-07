@@ -1,6 +1,6 @@
-from interface.schemas.Scheduling import SchedulingDto, SchedulingUpdateRequestDto
-from interface.schemas.Event import EventDto
-from infra.repositories.scheduling_repository import SchedulingRepository
+from schedly.interface.schemas.Scheduling import SchedulingDto, SchedulingUpdateRequestDto
+from schedly.interface.schemas.Event import EventDto
+from schedly.infra.repositories.scheduling_repository import SchedulingRepository
 
 
 class UpdateScheduling:

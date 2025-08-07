@@ -4,16 +4,16 @@ Caso de uso para criação de eventos com disponibilidades padrão.
 from datetime import time
 from typing import List
 
-from core.models.avails import Avails
-from interface.schemas.Avails import AvailsDto, Availability
-from infra.repositories.avails_repository import AvailsRepository
-from infra.repositories.user_repository import UserRepository
-from interface.schemas.Event import EventCreateRequestDto, EventDto
-from infra.repositories.event_repository import (
+from schedly.core.models.avails import Avails
+from schedly.interface.schemas.Avails import AvailsDto, Availability
+from schedly.infra.repositories.avails_repository import AvailsRepository
+from schedly.infra.repositories.user_repository import UserRepository
+from schedly.interface.schemas.Event import EventCreateRequestDto, EventDto
+from schedly.infra.repositories.event_repository import (
     EventRepository,
     Event,
 )
-from utils.validate_slug import validate_slug
+from schedly.utils.validate_slug import validate_slug
 
 
 class CreateEvent:

@@ -1,10 +1,10 @@
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 
-from infra.database import get_pg_session
-from infra.repositories.user_repository import UserRepository
-from interface.schemas.Auth import LoginRequestDto, LoginResponseDto, RegisterRequestDto, RegisterResponseDto
-from interface.service.auth_service import AuthService
+from schedly.infra.database import get_pg_session
+from schedly.infra.repositories.user_repository import UserRepository
+from schedly.interface.schemas.Auth import LoginRequestDto, LoginResponseDto, RegisterRequestDto, RegisterResponseDto
+from schedly.interface.service.auth_service import AuthService
 
 router = APIRouter(
     prefix="/auth",

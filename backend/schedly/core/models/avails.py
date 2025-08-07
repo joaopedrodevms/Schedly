@@ -1,6 +1,6 @@
 from datetime import time
 from sqlalchemy import Time as SATime  # alias para evitar conflito com datetime.time
-from infra.database.base import BaseTable
+from schedly.infra.database.base import BaseTable
 from .event import Event
 from sqlmodel import Relationship, Field, Column
 import uuid

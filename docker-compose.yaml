@@ -1,33 +1,77 @@
+
 services:
+  backend:
+    container_name: backend
+    build:
+      context: ./backend
+    env_file:
+      - ./.env
+    ports:
+      - "8000:8000"
+    depends_on:
+      - postgres
+      - minio
+    restart: unless-stopped
+    networks:
+      - schedly-network
+
+  frontend:
+    container_name: frontend
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+      args:
+        VITE_API_URL: ${VITE_API_URL}
+        VITE_APP_URL: ${VITE_APP_URL}
+    env_file:
+      - ./.env
+    ports:
+      - "5173:5173"
+    restart: unless-stopped
+    depends_on:
+      - backend
+      - postgres
+      - minio
+    networks:
+      - schedly-network
+
+  minio:
+      image: minio/minio
+      container_name: minio
+      environment:
+        MINIO_ROOT_USER: ${MINIO_ACCESSKEY}
+        MINIO_ROOT_PASSWORD: ${MINIO_SECRETKEY}
+      command: server /data --console-address ":9001"
+      networks:
+        - schedly-network
+      ports:
+        - "9000:9000"
+        - "9001:9001"
+      volumes:
+        - minio_data:/data
+
   postgres:
     image: postgres:15
     container_name: postgres
-    env_file:
-      - ./.env
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    ports:
+      - "5432:5432"
     networks:
-      - schedly_network
+      - schedly-network
     volumes:
       - postgres_data:/var/lib/postgresql/data
-
-  minio:
-    image: minio/minio
-    container_name: minio
-    environment:
-      MINIO_ROOT_USER: admin
-      MINIO_ROOT_PASSWORD: admin1234
-    command: server /data --console-address ":9001"
-    networks:
-      - schedly_network
-    ports:
-      - "9000:9000"
-      - "9001:9001"
-    volumes:
-      - minio_data:/data
-
-networks:
-  schedly_network:
-    driver: bridge
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
 
 volumes:
   postgres_data:
   minio_data:
+
+networks:
+  schedly-network:

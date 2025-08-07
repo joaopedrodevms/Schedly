@@ -1,13 +1,13 @@
-from interface.schemas.Avails import AvailsDto
+from schedly.interface.schemas.Avails import AvailsDto
 from fastapi import APIRouter, Body, Depends
 from fastapi.exceptions import HTTPException
 from sqlalchemy.orm import Session
 
-from infra.database import get_pg_session
-from infra.repositories.avails_repository import AvailsRepository
-from interface.service.avails_service import AvailsService
+from schedly.infra.database import get_pg_session
+from schedly.infra.repositories.avails_repository import AvailsRepository
+from schedly.interface.service.avails_service import AvailsService
 
-from interface.middleware.jwt_bearer import JWTBearer
+from schedly.interface.middleware.jwt_bearer import JWTBearer
 
 router = APIRouter(
     prefix="/avails",

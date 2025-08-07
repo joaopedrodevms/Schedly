@@ -1,5 +1,5 @@
 import uuid
-from interface.schemas.Avails import AvailsDto
+from schedly.interface.schemas.Avails import AvailsDto
 from schedly.core.use_cases.avails import (
     CreateAvails,
     GetAvailsByEventId,

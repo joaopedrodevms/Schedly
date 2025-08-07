@@ -15,6 +15,11 @@ import { useAuth } from "@/context/AuthContext"
 import type { EventDto, EventLocation, EventUpdateRequestDto } from "@/service/types.gen"
 import { Availabilities } from "./availabilities"
 
+const appUrl = process.env.VITE_APP_URL || 'http://localhost:5173';
+if (!appUrl) {
+  throw new Error('VITE_APP_URL não está definida no arquivo .env');
+}
+
 type EventChanges = {
     [key: string]: EventUpdateRequestDto
 }
@@ -138,7 +143,7 @@ export function EventAccordion({ events, onSuccess }: EventAccordionProps) {
     const getEventUrl = (event: { id: string, slug: string }) => {
         // Se houver uma mudança no slug, use o novo valor
         const currentSlug = slugInputs[event.id] ?? event.slug
-        return `https://schedly.com.br/${user?.slug}/${currentSlug}`
+        return `${appUrl}/${user?.slug}/${currentSlug}`
     }
 
     return (

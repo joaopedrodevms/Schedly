@@ -1,6 +1,6 @@
 import uuid
-from infra.repositories.avails_repository import AvailsRepository
-from core.use_cases.event import (
+from schedly.infra.repositories.avails_repository import AvailsRepository
+from schedly.core.use_cases.event import (
     CreateEvent,
     DeleteEvent,
     GetEvent,
@@ -8,13 +8,13 @@ from core.use_cases.event import (
     GetEventByUserSlug,
     UpdateEvent,
 )
-from infra.repositories.event_repository import (
+from schedly.infra.repositories.event_repository import (
     EventRepository,
     Event,
 )
-from interface.schemas.Event import EventBySlugRequestDto, EventCreateRequestDto, EventDto, EventUpdateRequestDto, EventWithAvailabilityDto
-from infra.repositories.user_repository import UserRepository
-from infra.repositories.scheduling_repository import SchedulingRepository
+from schedly.interface.schemas.Event import EventBySlugRequestDto, EventCreateRequestDto, EventDto, EventUpdateRequestDto, EventWithAvailabilityDto
+from schedly.infra.repositories.user_repository import UserRepository
+from schedly.infra.repositories.scheduling_repository import SchedulingRepository
 
 class EventService:
     def __init__(self, repo: EventRepository, user_repo: UserRepository, avail_repo: AvailsRepository, scheduling_repo: SchedulingRepository):

@@ -1,5 +1,5 @@
 import uuid
-from infra.repositories.scheduling_repository import SchedulingRepository
+from schedly.infra.repositories.scheduling_repository import SchedulingRepository
 
 
 class DeleteScheduling:

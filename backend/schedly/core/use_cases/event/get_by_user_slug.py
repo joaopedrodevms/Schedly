@@ -1,11 +1,11 @@
 from typing import Optional, List
 from datetime import datetime, time
-from interface.exceptions.custom_exceptions import NotFoundException
-from interface.schemas.Event import EventBySlugRequestDto, EventWithAvailabilityDto, EventAvailabilityDto, EventUnavailabilityDto, UserProfileDto
-from infra.repositories.event_repository import EventRepository
-from infra.repositories.user_repository import UserRepository
-from infra.repositories.avails_repository import AvailsRepository
-from infra.repositories.scheduling_repository import SchedulingRepository
+from schedly.interface.exceptions.custom_exceptions import NotFoundException
+from schedly.interface.schemas.Event import EventBySlugRequestDto, EventWithAvailabilityDto, EventAvailabilityDto, EventUnavailabilityDto, UserProfileDto
+from schedly.infra.repositories.event_repository import EventRepository
+from schedly.infra.repositories.user_repository import UserRepository
+from schedly.infra.repositories.avails_repository import AvailsRepository
+from schedly.infra.repositories.scheduling_repository import SchedulingRepository
 
 
 class GetEventByUserSlug:

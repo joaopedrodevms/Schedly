@@ -1,9 +1,9 @@
 from datetime import datetime, timedelta
-from interface.schemas.Scheduling import SchedulingCreateRequestDto, SchedulingDto
-from interface.schemas.Event import EventDto
-from infra.repositories.event_repository import EventRepository
-from infra.repositories.avails_repository import AvailsRepository
-from infra.repositories.scheduling_repository import SchedulingRepository, Scheduling
+from schedly.interface.schemas.Scheduling import SchedulingCreateRequestDto, SchedulingDto
+from schedly.interface.schemas.Event import EventDto
+from schedly.infra.repositories.event_repository import EventRepository
+from schedly.infra.repositories.avails_repository import AvailsRepository
+from schedly.infra.repositories.scheduling_repository import SchedulingRepository, Scheduling
 
 
 class CreateScheduling:

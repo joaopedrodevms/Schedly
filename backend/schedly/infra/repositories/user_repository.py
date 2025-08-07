@@ -2,7 +2,7 @@ from sqlalchemy.future import select
 from sqlalchemy.orm import Session
 import uuid
 
-from core.models.user import User
+from schedly.core.models.user import User
 
 
 class UserRepository:

@@ -1,16 +1,16 @@
-from infra.storage.storage_service import StorageService
+from schedly.infra.storage.storage_service import StorageService
 from fastapi import APIRouter, Body, Depends, File, UploadFile
 from fastapi.exceptions import HTTPException
 from sqlalchemy.orm import Session
 
-from infra.database import get_pg_session
-from infra.repositories.user_repository import UserRepository
-from core.models.user import User
-from interface.schemas.User import UserPublicDto, UserUpdatePhotoRequestDto, UserUpdateRequestDto, UserValidateSlugResponseDto
-from interface.service.user_service import UserService
-from interface.exceptions.photo_exceptions import PhotoUpdateException
+from schedly.infra.database import get_pg_session
+from schedly.infra.repositories.user_repository import UserRepository
+from schedly.core.models.user import User
+from schedly.interface.schemas.User import UserPublicDto, UserUpdatePhotoRequestDto, UserUpdateRequestDto, UserValidateSlugResponseDto
+from schedly.interface.service.user_service import UserService
+from schedly.interface.exceptions.photo_exceptions import PhotoUpdateException
 
-from interface.middleware.jwt_bearer import JWTBearer
+from schedly.interface.middleware.jwt_bearer import JWTBearer
 
 router = APIRouter(
     prefix="/users",

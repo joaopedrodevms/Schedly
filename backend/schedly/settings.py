@@ -11,8 +11,6 @@ class Settings(BaseSettings):
         'postgresql+asyncpg://postgres:123456@localhost:5432/schedly'
     )
     DATABASE_URL_TEST: str = 'postgres'
-    MONGO_DB_NAME: str = PROJECT_NAME
-    MONGO_URL: str = 'mongodb://localhost:27017/schedly'
 
     # JWT
     JWT_ACCESS_TOKEN_EXPIRE_MINUTES: int = 86400
@@ -25,6 +23,15 @@ class Settings(BaseSettings):
     LOG_LEVEL: str = 'DEGUB'
 
     OPENAPI_URL: str = '/openapi.json'
+
+    # MinIO
+    MINIO_ENDPOINT: str = 'localhost:9000'
+    MINIO_ACCESSKEY: str = 'admin'
+    MINIO_SECRETKEY: str = 'admin1234'
+    MINIO_SECURE: bool = False
+    MINIO_BUCKET_NAME: str = 'schedly-profiles'
+    MINIO_INTERNAL_URL: str = 'http://localhost:9000'
+    MINIO_PUBLIC_URL: str = 'http://localhost:9000'
 
 
 settings = Settings()
