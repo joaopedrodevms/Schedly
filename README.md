@@ -1,20 +1,24 @@
 # 📅 Schedly
 
-Schedly é uma aplicação moderna de agendamento criada como projeto de portfólio para demonstrar habilidades técnicas em desenvolvimento full stack com foco em arquitetura limpa, performance, usabilidade e boas práticas de engenharia de software. Com uma interface intuitiva e recursos robustos, o Schedly oferece uma experiência fluida para gerenciar eventos e disponibilidades de forma elegante e eficiente.
+Schedly é um projeto que desenvolvi para o meu portfólio com o objetivo de mostrar na prática minhas habilidades como dev full stack.
+
+A proposta é simples: criar uma aplicação moderna e funcional para agendamento de eventos e horários, com foco em experiência do usuário, arquitetura limpa, escalabilidade e boas práticas de engenharia de software. Tudo isso com uma interface bonita, responsiva e fácil de usar.
+
+Abaixo você já pode ver algumas telas do Schedly:
 
 ![Agendamento](screenshots/scheduling1-dark.png)
 ![Calendario Eventos](screenshots/calendar-dark.png)
 
-## ✨ Funcionalidades
+## ✨ O que o Schedly faz
 
-- 🗓️ Gerenciamento de eventos e disponibilidades
-- 👥 Perfis de usuário personalizáveis
-- 🌐 Interface moderna e responsiva
-- 🔐 Autenticação segura
+- 🗓️ Permite criar e gerenciar eventos e disponibilidades
+- 👥 Oferece perfis de usuário personalizáveis
+- 🌐 Interface moderna, fluida e responsiva
+- 🔐 Autenticação segura com JWT
 - 🎨 Tema claro/escuro
-- 🌍 Suporte a diferentes fusos horários
-- 📱 Design mobile-first
-- 🚀 Alta performance e escalabilidade
+- 🌍 Lida com diferentes fusos horários
+- 📱 Totalmente mobile-first
+- 🚀 Estruturado para alta performance e escalabilidade
 
 ## 🛠️ Tecnologias
 
@@ -57,9 +61,11 @@ Algumas telas da aplicação:
 ### Configurações
 ![Configuracao](screenshots/settings-dark.png)
 
-Outras imagens estão disponíveis na pasta /screenshots, incluindo diferentes páginas, variações de tema e exemplos de responsividade.
+Tem mais imagens na pasta /screenshots, inclusive com variações de tema.
 
-## 🚀 Como Iniciar
+## 🚀 Como Rodar Localmente
+
+Se você quiser testar a aplicação localmente, é super simples:
 
 ### Pré-requisitos
 
@@ -115,5 +121,6 @@ Este projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para ma
 
 ## 👨‍💻 Sobre o Projeto
 
-Schedly é um projeto de portfólio desenvolvido com foco em boas práticas de arquitetura, testes, performance e experiência do usuário. Ele reflete meu compromisso com a qualidade técnica e a entrega de soluções modernas e eficientes.
-Se você quiser conversar sobre o projeto ou tem interesse em colaboração, fique à vontade para entrar em contato!
+O Schedly foi feito com muito cuidado como uma vitrine das tecnologias e práticas que aplico no dia a dia: código limpo, arquitetura bem definida, foco em experiência do usuário e automação.
+
+Se você quiser trocar uma ideia, tiver feedbacks, ou quiser colaborar de alguma forma, fique à vontade para me chamar 🙂
