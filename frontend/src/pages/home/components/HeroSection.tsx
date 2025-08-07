@@ -7,7 +7,7 @@ import { Link } from "react-router-dom"
 export function HeroSection() {
 
     const { theme } = useTheme();
-    const img = theme === "dark" ? "/assets/schedly-dark.jpg" : "/assets/schedly-light.jpg";
+    const img = theme === "dark" ? "/assets/calendar-dark.png" : "/assets/calendar-light.png";
 
     return (
         <section className="relative py-24 md:py-32 overflow-hidden bg-gradient-to-b from-background to-background/95">
