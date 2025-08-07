@@ -1,4 +1,4 @@
-import { useId, useMemo, useState } from "react"
+import { useEffect, useId, useMemo, useState } from "react"
 import { CheckIcon, ChevronDownIcon } from "lucide-react"
 
 import { cn } from "@/lib/utils"
@@ -19,10 +19,23 @@ import {
 } from "@/components/ui/popover"
 import { ScrollArea } from "./ui/scroll-area"
 
-export default function SelectTimezone() {
+interface SelectTimezoneProps {
+  value?: string;
+  onChange?: (value: string) => void;
+  disabled?: boolean;
+}
+
+export default function SelectTimezone({ value: propValue, onChange, disabled }: SelectTimezoneProps) {
   const id = useId()
   const [open, setOpen] = useState<boolean>(false)
-  const [value, setValue] = useState<string>("America/Sao_Paulo")
+  const [value, setValue] = useState<string>(propValue || "America/Sao_Paulo")
+
+  // Atualiza o valor interno quando a prop muda
+  useEffect(() => {
+    if (propValue) {
+      setValue(propValue);
+    }
+  }, [propValue]);
 
   const timezones = Intl.supportedValuesOf("timeZone")
 
@@ -59,6 +72,7 @@ export default function SelectTimezone() {
             variant="outline"
             role="combobox"
             aria-expanded={open}
+            disabled={disabled}
             className="bg-background hover:bg-background border-input w-full justify-between px-3 font-normal outline-offset-0 outline-none focus-visible:outline-[3px]"
           >
             <span className={cn("truncate", !value && "text-muted-foreground")}>
@@ -97,8 +111,10 @@ export default function SelectTimezone() {
                       key={itemValue}
                       value={itemValue}
                       onSelect={(currentValue) => {
-                        setValue(currentValue === value ? "" : currentValue)
-                        setOpen(false)
+                        const newValue = currentValue === value ? "" : currentValue;
+                        setValue(newValue);
+                        setOpen(false);
+                        onChange?.(newValue);
                       }}
                     >
                       {label}

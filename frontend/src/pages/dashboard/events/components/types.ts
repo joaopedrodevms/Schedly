@@ -1,43 +1,27 @@
-export type TimeRange = {
-    id: string;
-    start: string;
-    end: string;
-};
+import type { EventUpdateRequestDto } from "@/service/types.gen"
 
-export type DayAvailability = {
-    ranges: TimeRange[];
-};
-
-export type WeekAvailability = {
-    [key in WeekDay]: DayAvailability;
-};
-
-export enum WeekDay {
-    SUNDAY = "DOM",
-    MONDAY = "SEG",
-    TUESDAY = "TER",
-    WEDNESDAY = "QUA",
-    THURSDAY = "QUI",
-    FRIDAY = "SEX",
-    SATURDAY = "SAB"
+export type EventChanges = {
+    [key: string]: EventUpdateRequestDto
 }
 
-export const WEEK_DAYS = [
-    WeekDay.SUNDAY,
-    WeekDay.MONDAY,
-    WeekDay.TUESDAY,
-    WeekDay.WEDNESDAY,
-    WeekDay.THURSDAY,
-    WeekDay.FRIDAY,
-    WeekDay.SATURDAY
-];
+export type SlugValidation = {
+    [key: string]: {
+        isValid: boolean,
+        message?: string
+    }
+}
 
-export const DEFAULT_WEEK_AVAILABILITY: WeekAvailability = {
-    [WeekDay.SUNDAY]: { ranges: [] },
-    [WeekDay.MONDAY]: { ranges: [] },
-    [WeekDay.TUESDAY]: { ranges: [] },
-    [WeekDay.WEDNESDAY]: { ranges: [] },
-    [WeekDay.THURSDAY]: { ranges: [] },
-    [WeekDay.FRIDAY]: { ranges: [] },
-    [WeekDay.SATURDAY]: { ranges: [] }
-}; 
+export type WeekDay = 0 | 1 | 2 | 3 | 4 | 5 | 6;
+
+// 0 = Segunda, 6 = Domingo
+export const WEEK_DAYS: WeekDay[] = [0, 1, 2, 3, 4, 5, 6];
+
+export const WEEK_DAY_LABELS: Record<WeekDay, string> = {
+    0: "SEG",
+    1: "TER",
+    2: "QUA",
+    3: "QUI",
+    4: "SEX",
+    5: "SAB",
+    6: "DOM"
+};

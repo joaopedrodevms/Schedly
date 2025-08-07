@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import { ModeToggle } from "@/theme/mode-toggle";
 import { Button } from "../ui/button";
 import { cn } from "@/lib/utils";
+import { useAuth } from "@/context/AuthContext";
 
 export interface SidebarLink {
     name: string;
@@ -41,6 +42,7 @@ export default function DashboardLayout() {
     const [sidebarLink, setSidebarLink] = useState(sidebarLinks);
     const location = useLocation();
     const activeLink = sidebarLink.find(link => link.selected);
+    const { logout } = useAuth();
 
     useEffect(() => {
         setSidebarLink(sidebarLink.map(l => l.to === location.pathname ? { ...l, selected: true } : { ...l, selected: false }));
@@ -94,7 +96,7 @@ export default function DashboardLayout() {
                     </SidebarGroup>
                 </SidebarContent>
                 <SidebarFooter>
-                    <Button size={"sm"} className={cn("w-full flex items-center", state === "collapsed" ? "justify-center" : "justify-start")} variant={"ghost"}>
+                    <Button size={"sm"} className={cn("w-full flex items-center", state === "collapsed" ? "justify-center" : "justify-start")} variant={"ghost"} onClick={logout}>
                         <LogOut />
                         {state === "expanded" && <span className="font-semibold">Sair</span>}
                     </Button>

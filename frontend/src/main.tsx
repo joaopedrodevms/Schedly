@@ -6,16 +6,20 @@ import { BrowserRouter } from 'react-router-dom'
 import { ThemeProvider } from './theme/theme-provider.tsx'
 import { Toaster } from './components/ui/sonner.tsx'
 import { Router } from './routes/index.tsx'
+import { QueryClientProvider } from '@tanstack/react-query'
+import { queryClient } from './lib/queryClient.ts'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <BrowserRouter>
-      <ThemeProvider>
-        <TooltipProvider>
-          <Router />
-          <Toaster />
-        </TooltipProvider>
-      </ThemeProvider>
-    </BrowserRouter>
+    <QueryClientProvider client={queryClient}>
+      <BrowserRouter>
+        <ThemeProvider>
+          <TooltipProvider>
+            <Router />
+            <Toaster />
+          </TooltipProvider>
+        </ThemeProvider>
+      </BrowserRouter>
+    </QueryClientProvider>
   </StrictMode>,
 )

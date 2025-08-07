@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
@@ -6,36 +6,92 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/com
 import { z } from "zod";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { CalendarRangeIcon, EyeIcon, EyeOffIcon, KeyIcon, MailIcon, UserIcon } from "lucide-react";
-import { Link } from "react-router-dom";
+import { CalendarRangeIcon, EyeIcon, EyeOffIcon, KeyIcon, LinkIcon, MailIcon, UserIcon, CheckIcon, XIcon } from "lucide-react";
+import { Link, useNavigate } from "react-router-dom";
+import { useMutation, useQuery } from "@tanstack/react-query";
+import { registerMutation, validateSlugOptions } from "@/service/@tanstack/react-query.gen";
+import { toast } from "sonner";
+import { useDebounce } from "@/hooks/use-debounce";
+import { useAuth } from "@/context/AuthContext";
 
 const formSchema = z.object({
     name: z.string().min(3, "O nome deve ter no mínimo 3 caracteres"),
-    email: z.string().email("E-mail inválido"),
-    password: z.string().min(6, "A senha deve ter no mínimo 6 caracteres")
+    email: z.email("E-mail inválido"),
+    password: z.string().min(6, "A senha deve ter no mínimo 6 caracteres"),
+    slug: z.string().min(3, "O slug deve ter no mínimo 3 caracteres")
 });
 
 type RegisterSchema = z.infer<typeof formSchema>;
 
 export default function Register() {
+    const navigate = useNavigate();
+    const { login } = useAuth();
     const [isLoading, setIsLoading] = useState(false);
-    const [isVisible, setIsVisible] = useState<boolean>(false)
+    const [isVisible, setIsVisible] = useState<boolean>(false);
+    const [slugValue, setSlugValue] = useState<string>("");
+    const debouncedSlug = useDebounce(slugValue, 500);
 
-    const toggleVisibility = () => setIsVisible((prevState) => !prevState)
     const form = useForm<RegisterSchema>({
         resolver: zodResolver(formSchema),
         defaultValues: {
             name: "",
             email: "",
             password: "",
+            slug: "",
         }
     });
+
+    const validateSlug = useQuery({
+        ...validateSlugOptions({
+            query: {
+                slug: debouncedSlug
+            }
+        }),
+        enabled: debouncedSlug.length >= 3,
+    });
+
+    const register = useMutation({
+        ...registerMutation(),
+        onSuccess: (data) => {
+            toast.success("Conta criada com sucesso!");
+            login(data.access_token, data.user);
+            navigate("/dashboard/calendar");
+        },
+        onError: (error) => {
+            const errorMessage = error instanceof Error ? error.message : "Erro ao criar conta.";
+            toast.error(errorMessage);
+        }
+    });
+
+    const toggleVisibility = () => setIsVisible((prevState) => !prevState);
+
+    useEffect(() => {
+        const subscription = form.watch((value, { name }) => {
+            if (name === "slug") {
+                setSlugValue(value.slug || "");
+            }
+        });
+        return () => subscription.unsubscribe();
+    }, [form.watch]);
 
     async function onSubmit(data: RegisterSchema) {
         setIsLoading(true);
         try {
-            console.log(data);
-            // Aqui você implementará a lógica de registro
+            if (!validateSlug.data?.is_valid) {
+                form.setError("slug", {
+                    type: "manual",
+                    message: "Este slug já está em uso"
+                });
+                return;
+            }
+            await register.mutateAsync({
+                body: {
+                    name: data.name,
+                    email: data.email,
+                    password: data.password,
+                    slug: data.slug
+                }
+            });
         } catch (error) {
             console.error(error);
         } finally {
@@ -147,6 +203,40 @@ export default function Register() {
                                                         <EyeIcon size={16} aria-hidden="true" />
                                                     )}
                                                 </button>
+                                            </div>
+                                        </FormControl>
+                                        <FormMessage />
+                                    </FormItem>
+                                )}
+                            />
+                            <FormField
+                                control={form.control}
+                                name="slug"
+                                render={({ field }) => (
+                                    <FormItem>
+                                        <FormLabel>Slug</FormLabel>
+                                        <FormControl>
+                                            <div className="relative">
+                                                <div className="text-muted-foreground/80 pointer-events-none absolute inset-y-0 start-0 flex items-center justify-center ps-3 peer-disabled:opacity-50">
+                                                    <LinkIcon size={16} aria-hidden="true" />
+                                                </div>
+                                                <Input
+                                                    className="pe-9 ps-9"
+                                                    placeholder="seu-slug"
+                                                    disabled={isLoading}
+                                                    {...field}
+                                                />
+                                                <div className="text-muted-foreground/80 pointer-events-none absolute inset-y-0 end-0 flex items-center justify-center pe-3 peer-disabled:opacity-50">
+                                                    {validateSlug.isLoading ? (
+                                                        <div className="size-4 border-2 border-foreground/20 border-t-foreground/80 rounded-full animate-spin" />
+                                                    ) : validateSlug.data?.is_valid ? (
+                                                        <CheckIcon size={16} className="text-green-500" aria-hidden="true" />
+                                                    ) : validateSlug.data?.is_valid === false ? (
+                                                        <XIcon size={16} className="text-red-500" aria-hidden="true" />
+                                                    ) : (
+                                                        <LinkIcon size={16} aria-hidden="true" />
+                                                    )}
+                                                </div>
                                             </div>
                                         </FormControl>
                                         <FormMessage />

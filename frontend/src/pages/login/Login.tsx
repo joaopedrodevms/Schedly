@@ -7,7 +7,11 @@ import { z } from "zod";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { CalendarRangeIcon, EyeIcon, EyeOffIcon, KeyIcon, MailIcon } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useMutation } from "@tanstack/react-query";
+import { loginMutation } from "@/service/@tanstack/react-query.gen";
+import { toast } from "sonner";
+import { useAuth } from "@/context/AuthContext";
 
 const formSchema = z.object({
     email: z.email("E-mail inválido"),
@@ -17,29 +21,39 @@ const formSchema = z.object({
 type LoginSchema = z.infer<typeof formSchema>;
 
 export default function Login() {
+    const [isVisible, setIsVisible] = useState<boolean>(false);
+    const navigate = useNavigate();
+    const { login } = useAuth();
 
-    const [isLoading, setIsLoading] = useState(false);
-    const [isVisible, setIsVisible] = useState<boolean>(false)
+    const authLogin = useMutation({
+        ...loginMutation()
+    })
 
     const toggleVisibility = () => setIsVisible((prevState) => !prevState)
     const form = useForm<LoginSchema>({
         resolver: zodResolver(formSchema),
         defaultValues: {
-            email: "",
-            password: "",
+            email: "joaopedro@email.com",
+            password: "123456",
         },
     });
 
     async function onSubmit(data: LoginSchema) {
-        setIsLoading(true);
-        try {
-            console.log(data);
-            // Aqui você implementará a lógica de login
-        } catch (error) {
-            console.error(error);
-        } finally {
-            setIsLoading(false);
-        }
+        authLogin.mutate({
+            body: {
+                email: data.email,
+                password: data.password,
+            }
+        }, {
+            onError: () => {
+                toast.error("Email ou senha inválidos")
+            },
+            onSuccess: (response) => {
+                login(response.access_token, response.user);
+                navigate("/dashboard/calendar")
+                toast.success("Login realizado com sucesso")
+            }
+        })
     }
 
     return (
@@ -78,7 +92,7 @@ export default function Login() {
                                                     className="peer ps-9"
                                                     type="email"
                                                     placeholder="seu@email.com"
-                                                    disabled={isLoading}
+                                                    disabled={authLogin.isPending}
                                                     {...field}
                                                 />
                                                 <div className="text-muted-foreground/80 pointer-events-none absolute inset-y-0 start-0 flex items-center justify-center ps-3 peer-disabled:opacity-50">
@@ -105,7 +119,7 @@ export default function Login() {
                                                     className="pe-9 ps-9"
                                                     placeholder="Sua senha"
                                                     type={isVisible ? "text" : "password"}
-                                                    disabled={isLoading}
+                                                    disabled={authLogin.isPending}
                                                     {...field}
                                                 />
                                                 <button
@@ -136,9 +150,9 @@ export default function Login() {
                             <Button
                                 type="submit"
                                 className="w-full"
-                                disabled={isLoading}
+                                disabled={authLogin.isPending}
                             >
-                                {isLoading ? "Entrando..." : "Entrar"}
+                                {authLogin.isPending ? "Entrando..." : "Entrar"}
                             </Button>
                             <div className="text-center text-sm">
                                 Novo por aqui?{" "}
