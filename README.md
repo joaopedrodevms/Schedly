@@ -6,8 +6,7 @@ A proposta é simples: criar uma aplicação moderna e funcional para agendament
 
 Abaixo você já pode ver algumas telas do Schedly:
 
-![Agendamento](screenshots/scheduling1-dark.png)
-![Calendario Eventos](screenshots/calendar-dark.png)
+![Schedly](/screenshots/Schedly.gif)
 
 ## ✨ O que o Schedly faz
 
@@ -42,26 +41,6 @@ Abaixo você já pode ver algumas telas do Schedly:
 - [React Router](https://reactrouter.com/) - Roteamento
 - [React Hook Form](https://react-hook-form.com/) - Gerenciamento de formulários
 - [Zod](https://zod.dev/) - Validação de esquemas
-
-## 🖼️ Pré-visualização
-
-Algumas telas da aplicação:
-
-### Tela Inicial
-![Tela Inicial](screenshots/home-dark.png)
-
-### Agendamento de Evento
-![Agendamento](screenshots/scheduling2-dark.png)
-![Agendamento](screenshots/scheduling3-dark.png)
-
-### Eventos
-![Eventos](screenshots/event_list-dark.png)
-![Eventos](screenshots/event_view1-dark.png)
-
-### Configurações
-![Configuracao](screenshots/settings-dark.png)
-
-Tem mais imagens na pasta /screenshots, inclusive com variações de tema.
 
 ## 🚀 Como Rodar Localmente
 
@@ -108,19 +87,28 @@ O projeto segue uma arquitetura limpa e modular:
 - \`/hooks\` - Hooks personalizados
 - \`/service\` - Serviços e integrações
 
-## 🧪 Testes
 
-Para rodar os testes do backend:
-```
-docker compose exec backend poetry run task test
-```
+## 🖼️ Pré-visualização
+
+Algumas telas da aplicação:
+
+### Tela Inicial
+![Tela Inicial](screenshots/home-dark.png)
+
+### Eventos
+![Eventos](screenshots/event_list-dark.png)
+![Eventos](screenshots/event_view1-dark.png)
+
+### Configurações
+![Configuracao](screenshots/settings-dark.png)
+
+
+### Autenticação
+![Login](screenshots/login-dark.png)
+![Register](screenshots/register-dark.png)
+
+Tem mais imagens na pasta /screenshots, inclusive com variações de tema.
 
 ## 📝 Licença
 
 Este projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
-
-## 👨‍💻 Sobre o Projeto
-
-O Schedly foi feito com muito cuidado como uma vitrine das tecnologias e práticas que aplico no dia a dia: código limpo, arquitetura bem definida, foco em experiência do usuário e automação.
-
-Se você quiser trocar uma ideia, tiver feedbacks, ou quiser colaborar de alguma forma, fique à vontade para me chamar 🙂
