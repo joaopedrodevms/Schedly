@@ -2,6 +2,7 @@ from fastapi import Request
 from fastapi.responses import JSONResponse
 
 from interface.exceptions.custom_exceptions import (
+    AuthenticationException,
     BusinessException,
     NotFoundException,
     ValidationException,
@@ -44,6 +45,15 @@ async def validation_exception_handler(
     return JSONResponse(
         status_code=422,
         content={'error': 'Validation Error', 'detail': exc.detail},
+    )
+
+
+async def authentication_exception_handler(
+    request: Request, exc: AuthenticationException
+):
+    return JSONResponse(
+        status_code=401,
+        content={'error': 'Authentication Error', 'detail': exc.detail},
     )
 
 

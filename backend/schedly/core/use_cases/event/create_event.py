@@ -13,6 +13,7 @@ from infra.repositories.event_repository import (
     EventRepository,
     Event,
 )
+from utils.validate_slug import validate_slug
 
 
 class CreateEvent:
@@ -31,6 +32,37 @@ class CreateEvent:
         self.user_repo = user_repo
         self.avail_repo = avail_repo
 
+    def _validate_event_parameters(self, data: EventCreateRequestDto) -> None:
+        """
+        Valida os parâmetros do evento antes da criação.
+        
+        Args:
+            data: Dados do evento a ser validado
+            
+        Raises:
+            ValueError: Se algum parâmetro for inválido
+        """
+        if not data.title or len(data.title.strip()) < 3:
+            raise ValueError('O título do evento deve ter pelo menos 3 caracteres')
+            
+        if not data.slug or len(data.slug.strip()) < 3:
+            raise ValueError('O slug do evento deve ter pelo menos 3 caracteres')
+            
+        if not data.slug.isalnum() and '-' not in data.slug:
+            raise ValueError('O slug deve conter apenas letras, números ou hífen')
+            
+        if data.duration_minutes < 15:
+            raise ValueError('A duração mínima do evento deve ser de 15 minutos')
+            
+        if data.duration_minutes > 480:  # 8 horas
+            raise ValueError('A duração máxima do evento deve ser de 8 horas')
+            
+        if data.buffer_before < 0 or data.buffer_after < 0:
+            raise ValueError('Os buffers não podem ser negativos')
+            
+        if data.buffer_before + data.buffer_after > 120:  # 2 horas
+            raise ValueError('A soma dos buffers não pode exceder 2 horas')
+
     async def execute(self, data: EventCreateRequestDto) -> EventDto:
         """
         Executa o caso de uso de criação de evento.
@@ -44,6 +76,7 @@ class CreateEvent:
         Raises:
             ValueError: Se o usuário não existir ou se o slug já existir
         """
+        self._validate_event_parameters(data)
         await self._validate_user(data.user_id)
         new_event = self._create_event_model(data)
         await self._validate_unique_slug(new_event)
@@ -77,6 +110,9 @@ class CreateEvent:
         slugs = await self.event_repo.get_slugs_by_user_id(event.user_id)
         if event.slug in slugs:
             raise ValueError('Evento com slug já existe')
+        
+        if not validate_slug(event.slug):
+            raise ValueError('Slug inválido')
 
     async def _create_default_availabilities(self, event_id: str) -> None:
         """Cria as disponibilidades padrão para o evento."""
@@ -109,7 +145,10 @@ class CreateEvent:
             await self.avail_repo.save(new_avails)
 
     @staticmethod
-    def _parse_time_str(time_str: str) -> time:
-        """Converte uma string de hora (HH:MM) para um objeto time."""
-        hour, minute = map(int, time_str.split(':'))
+    def _parse_time_str(time_value: str | time) -> time:
+        """Converte uma string de hora (HH:MM) ou um objeto time para um objeto time."""
+        if isinstance(time_value, time):
+            return time_value
+        
+        hour, minute = map(int, time_value.split(':'))
         return time(hour, minute)

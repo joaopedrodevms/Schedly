@@ -6,11 +6,13 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from interface.exceptions.custom_exceptions import (
+    AuthenticationException,
     BusinessException,
     NotFoundException,
     ValidationException,
 )
 from interface.exceptions.handlers import (
+    authentication_exception_handler,
     business_exception_handler,
     invalid_type,
     invalid_value,
@@ -63,6 +65,7 @@ app.add_exception_handler(ValueError, invalid_value)
 app.add_exception_handler(NotFoundException, not_found_exception_handler)
 app.add_exception_handler(BusinessException, business_exception_handler)
 app.add_exception_handler(ValidationException, validation_exception_handler)
+app.add_exception_handler(AuthenticationException, authentication_exception_handler)
 app.add_exception_handler(TypeError, invalid_type)
 
 

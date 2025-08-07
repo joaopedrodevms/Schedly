@@ -1,12 +1,13 @@
 import uuid
 import datetime
 from typing import Optional
+from interface.schemas.Event import EventDto
 from core.models.scheduling import EventStatus
 from pydantic import BaseModel
 
 class SchedulingDto(BaseModel):
     id: uuid.UUID
-    event_id: uuid.UUID
+    event: EventDto
     quest_name: str
     quest_email: str
     quest_message: str

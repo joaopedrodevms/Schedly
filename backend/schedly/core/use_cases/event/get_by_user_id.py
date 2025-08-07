@@ -12,6 +12,4 @@ class GetEventByUserId:
 
     async def get_by_user_id(self, user_id: uuid.UUID) -> list[EventDto]:
         events = await self.event_repo.get_by_user_id(user_id)
-        if not events:
-            raise ValueError('Event não encontrado')
         return [EventDto(**event.model_dump()) for event in events]

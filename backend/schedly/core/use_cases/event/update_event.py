@@ -1,6 +1,7 @@
 import uuid
 from interface.schemas.Event import EventDto, EventUpdateRequestDto
 from infra.repositories.event_repository import EventRepository, Event
+from utils.validate_slug import validate_slug
 
 
 class UpdateEvent:
@@ -31,3 +32,6 @@ class UpdateEvent:
         slugs = await self.event_repo.get_slugs_by_user_id(user_id)
         if slug in slugs:
             raise ValueError('Evento com slug já existe')
+        
+        if not validate_slug(slug):
+            raise ValueError('Slug inválido')

@@ -1063,6 +1063,25 @@ files = [
 ]
 
 [[package]]
+name = "minio"
+version = "7.2.16"
+description = "MinIO Python SDK for Amazon S3 Compatible Cloud Storage"
+optional = false
+python-versions = ">=3.9"
+groups = ["main"]
+files = [
+    {file = "minio-7.2.16-py3-none-any.whl", hash = "sha256:9288ab988ca57c181eb59a4c96187b293131418e28c164392186c2b89026b223"},
+    {file = "minio-7.2.16.tar.gz", hash = "sha256:81e365c8494d591d8204a63ee7596bfdf8a7d06ad1b1507d6b9c1664a95f299a"},
+]
+
+[package.dependencies]
+argon2-cffi = "*"
+certifi = "*"
+pycryptodome = "*"
+typing-extensions = "*"
+urllib3 = "*"
+
+[[package]]
 name = "motor"
 version = "3.6.0"
 description = "Non-blocking MongoDB driver for Tornado or asyncio"
@@ -2100,7 +2119,7 @@ version = "2.3.0"
 description = "HTTP library with thread-safe connection pooling, file post, and more."
 optional = false
 python-versions = ">=3.9"
-groups = ["dev"]
+groups = ["main", "dev"]
 files = [
     {file = "urllib3-2.3.0-py3-none-any.whl", hash = "sha256:1cee9ad369867bfdbbb48b7dd50374c0967a0bb7710050facf0dd6911440e3df"},
     {file = "urllib3-2.3.0.tar.gz", hash = "sha256:f8c5449b3cf0861679ce7e0503c7b44b5ec981bec0d1d3795a07f1ba96f0204d"},
@@ -2379,4 +2398,4 @@ files = [
 [metadata]
 lock-version = "2.1"
 python-versions = "3.12.*"
-content-hash = "f8c6d00f21b9699f919e182811e1bebacbba805e6cfcac82529d266a5ebe2c9b"
+content-hash = "c99f83e7ec6351d79031676bda8a014ce2cb05b5dddcf98a17acbca7677e9685"

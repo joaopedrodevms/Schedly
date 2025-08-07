@@ -25,6 +25,7 @@ passlib = "^1.7.4"
 pycryptodome = "^3.20.0"
 alembic = "^1.16.4"
 argon2-cffi = "^25.1.0"
+minio = "^7.2.16"
 
 
 [tool.poetry.group.dev.dependencies]

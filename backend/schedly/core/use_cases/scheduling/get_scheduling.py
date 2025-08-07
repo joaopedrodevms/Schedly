@@ -1,5 +1,6 @@
 import uuid
 from interface.schemas.Scheduling import SchedulingDto
+from interface.schemas.Event import EventDto
 from infra.repositories.scheduling_repository import SchedulingRepository, Scheduling
 
 
@@ -15,7 +16,19 @@ class GetScheduling:
         return [
             SchedulingDto(
                 id=scheduling.id,
-                event_id=scheduling.event_id,
+                event=EventDto(
+                    id=scheduling.event.id,
+                    user_id=scheduling.event.user_id,
+                    title=scheduling.event.title,
+                    description=scheduling.event.description,
+                    slug=scheduling.event.slug,
+                    buffer_before=scheduling.event.buffer_before,
+                    buffer_after=scheduling.event.buffer_after,
+                    duration_minutes=scheduling.event.duration_minutes,
+                    location_type=scheduling.event.location_type,
+                    created_at=scheduling.event.created_at,
+                    updated_at=scheduling.event.updated_at
+                ),
                 quest_name=scheduling.quest_name,
                 quest_email=scheduling.quest_email,
                 quest_message=scheduling.quest_message,

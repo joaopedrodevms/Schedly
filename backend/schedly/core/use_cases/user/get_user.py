@@ -7,7 +7,7 @@ class GetUser:
     def __init__(self, user_repo: UserRepository):
         self.user_repo = user_repo
 
-    async def get_current_user(self, token_user_id: uuid.UUID) -> UserPublicDto | None:
+    async def execute(self, token_user_id: uuid.UUID) -> UserPublicDto | None:
         user = await self.user_repo.get_by_id(token_user_id)
         if not user:
             return None

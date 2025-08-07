@@ -34,8 +34,8 @@ async def get_scheduling(
     else:
         scheduling = await service.get_by_user_id(token_user_id)
 
-    if not scheduling:
-        raise HTTPException(status_code=404, detail="Scheduling não encontrado")
+    # if not scheduling:
+        # raise HTTPException(status_code=404, detail="Scheduling não encontrado")
 
     return scheduling
 
@@ -53,7 +53,7 @@ async def create_scheduling(
     return scheduling
 
 
-@router.put("", response_model=Scheduling, tags=["Schedulings"], operation_id="update_scheduling")
+@router.put("", response_model=SchedulingDto, tags=["Schedulings"], operation_id="update_scheduling")
 async def update_scheduling(
     data: SchedulingUpdateRequestDto = Body(),  # type: ignore
     db_session: Session = Depends(get_pg_session),
@@ -63,11 +63,7 @@ async def update_scheduling(
     avail_repo = AvailsRepository(db_session)
     service = SchedulingService(repo, event_repo, avail_repo)
 
-    # Converte o body em dicionário, removendo campos nulos
-    update_data = data.model_dump(exclude_unset=True)
-
-    # Passa os dados descompactados para a função de atualização
-    return await service.update(scheduling_id=data.id, **update_data)
+    return await service.update(scheduling_id=data.id, data=data)
 
 
 @router.delete("", tags=["Schedulings"], operation_id="delete_scheduling")

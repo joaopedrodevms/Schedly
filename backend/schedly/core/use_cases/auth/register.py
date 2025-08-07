@@ -1,6 +1,7 @@
 from infra.security.jwt_handler import create_access_token
 from interface.schemas.User import UserPublicDto
 from core.models.user import User
+from utils.validate_slug import validate_slug
 from utils.password import hash_password
 from interface.schemas.Auth import RegisterRequestDto, RegisterResponseDto
 from infra.repositories.user_repository import UserRepository
@@ -26,6 +27,9 @@ class Register:
             raise ValueError("Invalid email")
 
         if await self.user_repo.get_by_slug(new_user.slug):
+            raise ValueError("Invalid slug")
+
+        if not validate_slug(new_user.slug):
             raise ValueError("Invalid slug")
 
         new_user.password = hash_password(new_user.password)

@@ -1,8 +1,37 @@
 import uuid
 import datetime
-from typing import Optional
+from typing import Optional, List
+from datetime import time
 from core.models.event import EventLocation
 from pydantic import BaseModel
+
+class UserProfileDto(BaseModel):
+    name: str
+    avatar_url: str
+    cover_url: str
+
+class EventAvailabilityDto(BaseModel):
+    week_day: int
+    start_time: time
+    end_time: time
+
+class EventUnavailabilityDto(BaseModel):
+    starts_at: datetime.datetime
+    ends_at: datetime.datetime
+
+class EventWithAvailabilityDto(BaseModel):
+    id: uuid.UUID
+    title: str
+    description: str
+    duration_minutes: int
+    location_type: EventLocation
+    avails: List[EventAvailabilityDto]
+    not_available: List[EventUnavailabilityDto]
+    user: Optional[UserProfileDto] = None
+
+class EventBySlugRequestDto(BaseModel):
+    user_slug: str
+    event_slug: str
 
 class EventDto(BaseModel):
     id: uuid.UUID

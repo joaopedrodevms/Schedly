@@ -5,13 +5,14 @@ from core.use_cases.event import (
     DeleteEvent,
     GetEvent,
     GetEventByUserId,
+    GetEventByUserSlug,
     UpdateEvent,
 )
 from infra.repositories.event_repository import (
     EventRepository,
     Event,
 )
-from interface.schemas.Event import EventCreateRequestDto, EventDto, EventUpdateRequestDto
+from interface.schemas.Event import EventBySlugRequestDto, EventCreateRequestDto, EventDto, EventUpdateRequestDto, EventWithAvailabilityDto
 from infra.repositories.user_repository import UserRepository
 from infra.repositories.scheduling_repository import SchedulingRepository
 
@@ -33,6 +34,10 @@ class EventService:
     async def get_by_user_id(self, user_id: uuid.UUID) -> list[EventDto]:
         use_case = GetEventByUserId(self.repo)
         return await use_case.get_by_user_id(user_id)
+
+    async def get_by_user_slug(self, data: EventBySlugRequestDto) -> EventWithAvailabilityDto:
+        use_case = GetEventByUserSlug(self.repo, self.user_repo, self.avail_repo, self.scheduling_repo)
+        return await use_case.execute(data)
 
     async def update(self, data: EventUpdateRequestDto, user_id: uuid.UUID) -> EventDto:
         use_case = UpdateEvent(self.repo)

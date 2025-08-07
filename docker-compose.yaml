@@ -1,0 +1,33 @@
+services:
+  postgres:
+    image: postgres:15
+    container_name: postgres
+    env_file:
+      - ./.env
+    networks:
+      - schedly_network
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  minio:
+    image: minio/minio
+    container_name: minio
+    environment:
+      MINIO_ROOT_USER: admin
+      MINIO_ROOT_PASSWORD: admin1234
+    command: server /data --console-address ":9001"
+    networks:
+      - schedly_network
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+    volumes:
+      - minio_data:/data
+
+networks:
+  schedly_network:
+    driver: bridge
+
+volumes:
+  postgres_data:
+  minio_data:

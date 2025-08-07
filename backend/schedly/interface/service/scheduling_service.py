@@ -1,7 +1,7 @@
 import uuid
 from infra.repositories.avails_repository import AvailsRepository
 from infra.repositories.event_repository import EventRepository
-from interface.schemas.Scheduling import SchedulingCreateRequestDto, SchedulingDto
+from interface.schemas.Scheduling import SchedulingCreateRequestDto, SchedulingDto, SchedulingUpdateRequestDto
 from core.use_cases.scheduling import (
     CreateScheduling,
     DeleteScheduling,
@@ -30,9 +30,9 @@ class SchedulingService:
         use_case = GetSchedulingByUserId(self.repo, self.event_repo)
         return await use_case.get_by_user_id(user_id)
 
-    async def update(self, scheduling_id: uuid.UUID, **kwargs) -> Scheduling:
+    async def update(self, scheduling_id: uuid.UUID, data: SchedulingUpdateRequestDto) -> SchedulingDto:
         use_case = UpdateScheduling(self.repo)
-        return await use_case.execute(scheduling_id=scheduling_id, **kwargs)
+        return await use_case.execute(scheduling_id=scheduling_id, data=data)
 
     async def delete(self, scheduling_id: uuid.UUID) -> None:
         use_case = DeleteScheduling(self.repo)

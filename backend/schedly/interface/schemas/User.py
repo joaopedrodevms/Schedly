@@ -1,6 +1,6 @@
 import uuid
 import datetime
-from typing import Optional
+from typing import Any, Optional
 from pydantic import BaseModel
 
 class UserPublicDto(BaseModel):
@@ -23,3 +23,12 @@ class UserUpdateRequestDto(BaseModel):
     email_verified: Optional[bool] = None
     avatar_url: Optional[str] = None
     cover_url: Optional[str] = None
+    timezone: Optional[str] = None
+
+class UserUpdatePhotoRequestDto(BaseModel):
+    file: Any
+    type: str
+
+class UserValidateSlugResponseDto(BaseModel):
+    is_valid: bool
+    message: str

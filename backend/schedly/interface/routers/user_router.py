@@ -1,12 +1,14 @@
-from fastapi import APIRouter, Body, Depends
+from infra.storage.storage_service import StorageService
+from fastapi import APIRouter, Body, Depends, File, UploadFile
 from fastapi.exceptions import HTTPException
 from sqlalchemy.orm import Session
 
 from infra.database import get_pg_session
 from infra.repositories.user_repository import UserRepository
 from core.models.user import User
-from interface.schemas.User import UserPublicDto, UserUpdateRequestDto
+from interface.schemas.User import UserPublicDto, UserUpdatePhotoRequestDto, UserUpdateRequestDto, UserValidateSlugResponseDto
 from interface.service.user_service import UserService
+from interface.exceptions.photo_exceptions import PhotoUpdateException
 
 from interface.middleware.jwt_bearer import JWTBearer
 
@@ -16,15 +18,16 @@ router = APIRouter(
 )
 
 
-@router.get("", response_model=UserPublicDto, tags=["Users"], operation_id="get_current_user")
-async def get_current_user(
+@router.get("", response_model=UserPublicDto, tags=["Users"], operation_id="get_user")
+async def get_user(
     token_user_id: str = Depends(JWTBearer()),
     db_session: Session = Depends(get_pg_session),
 ):
     repo = UserRepository(db_session)
-    service = UserService(repo)
+    storage_service = StorageService()
+    service = UserService(repo, storage_service)
 
-    user = await service.get_current_user(token_user_id)
+    user = await service.get(token_user_id)
 
     if not user:
         raise HTTPException(status_code=404, detail="Usuário não encontrado")
@@ -38,14 +41,9 @@ async def update_user(
     db_session: Session = Depends(get_pg_session),
 ):
     repo = UserRepository(db_session)
-    service = UserService(repo)
-
-    # Converte o body em dicionário, removendo campos nulos
-    update_data = data.model_dump(exclude_unset=True)
-
-    # Passa os dados descompactados para a função de atualização
-    return await service.update(token_user_id=token_user_id, **update_data)
-
+    storage_service = StorageService()
+    service = UserService(repo, storage_service)
+    return await service.update(user_id=token_user_id, data=data)
 
 @router.delete("", response_model=UserPublicDto, tags=["Users"], operation_id="delete_user")
 async def delete_user(
@@ -53,5 +51,80 @@ async def delete_user(
     db_session=Depends(get_pg_session)
 ):
     repo = UserRepository(db_session)
-    service = UserService(repo)
+    storage_service = StorageService()
+    service = UserService(repo, storage_service)
     return await service.delete(token_user_id)
+
+
+@router.post("/avatar", response_model=UserPublicDto, tags=["Users"], operation_id="update_avatar")
+async def update_avatar(
+    file: UploadFile,
+    token_user_id: str = Depends(JWTBearer()),
+    db_session=Depends(get_pg_session)
+):
+    repo = UserRepository(db_session)
+    storage_service = StorageService()
+    service = UserService(repo, storage_service)
+    try:
+        return await service.update_avatar(token_user_id, file)
+    except PhotoUpdateException as e:
+        raise HTTPException(status_code=400, detail=str(e))
+    except Exception as e:
+        raise HTTPException(status_code=500, detail="Erro ao atualizar foto de perfil")
+
+
+@router.delete("/avatar", response_model=UserPublicDto, tags=["Users"], operation_id="remove_avatar")
+async def remove_avatar(
+    token_user_id: str = Depends(JWTBearer()),
+    db_session=Depends(get_pg_session)
+):
+    repo = UserRepository(db_session)
+    storage_service = StorageService()
+    service = UserService(repo, storage_service)
+    try:
+        return await service.remove_avatar(token_user_id)
+    except PhotoUpdateException as e:
+        raise HTTPException(status_code=400, detail=str(e))
+    except Exception as e:
+        raise HTTPException(status_code=500, detail="Erro ao remover foto de perfil")
+
+@router.post("/cover", response_model=UserPublicDto, tags=["Users"], operation_id="update_cover")
+async def update_cover(
+    file: UploadFile,
+    token_user_id: str = Depends(JWTBearer()),
+    db_session=Depends(get_pg_session)
+):
+    repo = UserRepository(db_session)
+    storage_service = StorageService()
+    service = UserService(repo, storage_service)
+    try:
+        return await service.update_cover(token_user_id, file)
+    except PhotoUpdateException as e:
+        raise HTTPException(status_code=400, detail=str(e))
+    except Exception as e:
+        raise HTTPException(status_code=500, detail="Erro ao atualizar foto de capa")
+
+@router.delete("/cover", response_model=UserPublicDto, tags=["Users"], operation_id="remove_cover")
+async def remove_cover(
+    token_user_id: str = Depends(JWTBearer()),
+    db_session=Depends(get_pg_session)
+):
+    repo = UserRepository(db_session)
+    storage_service = StorageService()
+    service = UserService(repo, storage_service)
+    try:
+        return await service.remove_cover(token_user_id)
+    except PhotoUpdateException as e:
+        raise HTTPException(status_code=400, detail=str(e))
+    except Exception as e:
+        raise HTTPException(status_code=500, detail="Erro ao remover foto de capa")
+
+@router.get("/validate-slug", response_model=UserValidateSlugResponseDto, tags=["Users"], operation_id="validate_slug")
+async def validate_slug(
+    slug: str = None,
+    db_session=Depends(get_pg_session)
+):
+    repo = UserRepository(db_session)
+    storage_service = StorageService()
+    service = UserService(repo, storage_service)
+    return await service.validate_slug(slug)
