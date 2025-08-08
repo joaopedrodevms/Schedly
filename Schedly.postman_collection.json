@@ -1,0 +1,705 @@
+{
+	"info": {
+		"_postman_id": "f6467329-1470-498c-b761-fdfba9cac0ca",
+		"name": "Schedly",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "19427923"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"joaopedro@email.com\",\r\n    \"password\": \"123456\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}{{resource}}/login",
+							"host": [
+								"{{baseUrl}}{{resource}}"
+							],
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"joaopedro\",\r\n    \"email\": \"joaopedro@email.com\",\r\n    \"password\": \"123456\",\r\n    \"slug\": \"joaopedro\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}{{resource}}/register",
+							"host": [
+								"{{baseUrl}}{{resource}}"
+							],
+							"path": [
+								"register"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							"let resource = pm.collectionVariables.get(\"resource\");\r",
+							"let value = \"/auth\";\r",
+							"if(resource != value) {\r",
+							"    pm.collectionVariables.set(\"resource\",value);\r",
+							"    console.log(\"[VARIABLES]: 'resource' atualizado para: \" + value);\r",
+							"}"
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "Me",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authorization_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}{{resource}}",
+							"host": [
+								"{{baseUrl}}{{resource}}"
+							],
+							"query": [
+								{
+									"key": "user_id",
+									"value": "abad7f50-5cfc-404b-bb26-845c426e2565",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authorization_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"joaopedro_dev\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}{{resource}}",
+							"host": [
+								"{{baseUrl}}{{resource}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authorization_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}{{resource}}",
+							"host": [
+								"{{baseUrl}}{{resource}}"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							"let resource = pm.collectionVariables.get(\"resource\");\r",
+							"let value = \"/users\";\r",
+							"if(resource != value) {\r",
+							"    pm.collectionVariables.set(\"resource\",value);\r",
+							"    console.log(\"[VARIABLES]: 'resource' atualizado para: \" + value);\r",
+							"}"
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Events",
+			"item": [
+				{
+					"name": "Create",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authorization_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"user_id\": \"5bdc8f5a-c08d-4ee4-97ff-049c3d665e62\",\r\n    \"title\": \"test\",\r\n    \"description\": \"\",\r\n    \"slug\": \"test\",\r\n    \"buffer_before\": 0,\r\n    \"buffer_after\": 0,\r\n    \"duration_minutes\": 30,\r\n    \"location_type\": \"location_in_person\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}{{resource}}",
+							"host": [
+								"{{baseUrl}}{{resource}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Read",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authorization_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}{{resource}}",
+							"host": [
+								"{{baseUrl}}{{resource}}"
+							],
+							"query": [
+								{
+									"key": "event_id",
+									"value": "aec71524-5bb6-4021-b9bf-b6d8bcf0ddd8",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Read Public",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authorization_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"user_slug\": \"joaopedro\",\r\n    \"event_slug\": \"call-test\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}{{resource}}/public",
+							"host": [
+								"{{baseUrl}}{{resource}}"
+							],
+							"path": [
+								"public"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authorization_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": \"aec71524-5bb6-4021-b9bf-b6d8bcf0ddd8\",\r\n    \"slug\": \"call\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}{{resource}}",
+							"host": [
+								"{{baseUrl}}{{resource}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authorization_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}{{resource}}?event_id=d66f54b4-b842-4459-b45c-6306b7c8863a",
+							"host": [
+								"{{baseUrl}}{{resource}}"
+							],
+							"query": [
+								{
+									"key": "event_id",
+									"value": "d66f54b4-b842-4459-b45c-6306b7c8863a"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							"let resource = pm.collectionVariables.get(\"resource\");\r",
+							"let value = \"/events\";\r",
+							"if(resource != value) {\r",
+							"    pm.collectionVariables.set(\"resource\",value);\r",
+							"    console.log(\"[VARIABLES]: 'resource' atualizado para: \" + value);\r",
+							"}"
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Avails",
+			"item": [
+				{
+					"name": "Create",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authorization_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"event_id\": \"8cc271c7-a14a-41f0-ba19-488b7dda6670\",\r\n    \"availability\": [\r\n        {\r\n            \"week_day\": 0,\r\n            \"start_time\": \"09:00:00\",\r\n            \"end_time\": \"18:00:00\"\r\n        },\r\n        {\r\n            \"week_day\": 1,\r\n            \"start_time\": \"09:00:00\",\r\n            \"end_time\": \"18:00:00\"\r\n        },\r\n        {\r\n            \"week_day\": 2,\r\n            \"start_time\": \"09:00:00\",\r\n            \"end_time\": \"18:00:00\"\r\n        },\r\n        {\r\n            \"week_day\": 3,\r\n            \"start_time\": \"09:00:00\",\r\n            \"end_time\": \"18:00:00\"\r\n        },\r\n        {\r\n            \"week_day\": 4,\r\n            \"start_time\": \"09:00:00\",\r\n            \"end_time\": \"18:00:00\"\r\n        }\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}{{resource}}",
+							"host": [
+								"{{baseUrl}}{{resource}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Read",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authorization_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}{{resource}}?event_id=ab03c9b2-b090-4f6b-b327-bfcc2e4e7068",
+							"host": [
+								"{{baseUrl}}{{resource}}"
+							],
+							"query": [
+								{
+									"key": "event_id",
+									"value": "ab03c9b2-b090-4f6b-b327-bfcc2e4e7068"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							"let resource = pm.collectionVariables.get(\"resource\");\r",
+							"let value = \"/avails\";\r",
+							"if(resource != value) {\r",
+							"    pm.collectionVariables.set(\"resource\",value);\r",
+							"    console.log(\"[VARIABLES]: 'resource' atualizado para: \" + value);\r",
+							"}"
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Scheduling",
+			"item": [
+				{
+					"name": "Create",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authorization_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"event_id\": \"8cc271c7-a14a-41f0-ba19-488b7dda6670\",\r\n    \"quest_name\": \"Joao pedro\",\r\n    \"quest_email\": \"joaopedro@email.com\",\r\n    \"quest_message\": \"reunião de alinhamento\",\r\n    \"starts_at\": \"2025-08-08T10:00\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}{{resource}}",
+							"host": [
+								"{{baseUrl}}{{resource}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Read",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authorization_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}{{resource}}",
+							"host": [
+								"{{baseUrl}}{{resource}}"
+							],
+							"query": [
+								{
+									"key": "scheduling_id",
+									"value": "bd735bf0-33ef-46a7-b29b-4331b4572b1b",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authorization_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": \"47d48823-a95b-4951-8f8b-7cbab2143ad5\",\r\n    \"quest_name\": \"Joao Pedro\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}{{resource}}",
+							"host": [
+								"{{baseUrl}}{{resource}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authorization_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}{{resource}}?scheduling_id=bd735bf0-33ef-46a7-b29b-4331b4572b1b",
+							"host": [
+								"{{baseUrl}}{{resource}}"
+							],
+							"query": [
+								{
+									"key": "scheduling_id",
+									"value": "bd735bf0-33ef-46a7-b29b-4331b4572b1b"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							"let resource = pm.collectionVariables.get(\"resource\");\r",
+							"let value = \"/scheduling\";\r",
+							"if(resource != value) {\r",
+							"    pm.collectionVariables.set(\"resource\",value);\r",
+							"    console.log(\"[VARIABLES]: 'resource' atualizado para: \" + value);\r",
+							"}"
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "http://localhost:8000",
+			"type": "string"
+		},
+		{
+			"key": "resource",
+			"value": "/users",
+			"type": "string"
+		},
+		{
+			"key": "authorization_token",
+			"value": "null",
+			"type": "string"
+		}
+	]
+}
