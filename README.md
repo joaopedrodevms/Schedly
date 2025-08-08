@@ -1,4 +1,4 @@
-# 📅 Schedly
+# Schedly
 
 Schedly é um projeto que desenvolvi para o meu portfólio com o objetivo de mostrar na prática minhas habilidades como dev full stack.
 
@@ -8,7 +8,7 @@ Abaixo você já pode ver algumas telas do Schedly:
 
 ![Schedly](/screenshots/Schedly.gif)
 
-## ✨ O que o Schedly faz
+## O que o Schedly faz
 
 - 🗓️ Permite criar e gerenciar eventos e disponibilidades
 - 👥 Oferece perfis de usuário personalizáveis
@@ -19,7 +19,7 @@ Abaixo você já pode ver algumas telas do Schedly:
 - 📱 Totalmente mobile-first
 - 🚀 Estruturado para alta performance e escalabilidade
 
-## 🛠️ Tecnologias
+## Tecnologias
 
 ### Backend
 - [FastAPI](https://fastapi.tiangolo.com/) - Framework web moderno e rápido
@@ -42,7 +42,7 @@ Abaixo você já pode ver algumas telas do Schedly:
 - [React Hook Form](https://react-hook-form.com/) - Gerenciamento de formulários
 - [Zod](https://zod.dev/) - Validação de esquemas
 
-## 🚀 Como Rodar Localmente
+## Como Rodar Localmente 🚀
 
 Se você quiser testar a aplicação localmente, é super simples:
 
@@ -70,7 +70,7 @@ A aplicação estará disponível em:
 - MinIO Console: http://localhost:9001
 - PostgreSQL: localhost:5432
 
-## 📦 Estrutura do Projeto
+## Estrutura do Projeto
 
 O projeto segue uma arquitetura limpa e modular:
 
@@ -88,7 +88,7 @@ O projeto segue uma arquitetura limpa e modular:
 - \`/service\` - Serviços e integrações
 
 
-## 🖼️ Pré-visualização
+## Pré-visualização
 
 Algumas telas da aplicação:
 
@@ -109,6 +109,6 @@ Algumas telas da aplicação:
 
 Tem mais imagens na pasta /screenshots, inclusive com variações de tema.
 
-## 📝 Licença
+## Licença
 
 Este projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
